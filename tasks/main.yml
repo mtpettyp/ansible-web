@@ -1,0 +1,8 @@
+---
+- name: apt-get update
+  apt:
+    update_cache: yes
+- import_tasks: nginx.yml
+  tags: nginx
+- import_tasks: letsencrypt.yml
+  tags: letsencrypt
