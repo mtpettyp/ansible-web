@@ -1,0 +1,32 @@
+---
+- name: Create html directory
+  file:
+    path: "/var/www/{{ site.name }}/html"
+    state: directory
+    mode: 0755
+    owner: www-data
+    group: www-data
+
+- name: Copy html
+  copy:
+    src: "{{ site.files }}"
+    dest: "/var/www/{{ site.name }}/html/"
+    mode: 0644
+    owner: www-data
+    group: www-data
+
+- name: Create server conf
+  template:
+    src: "templates/conf/site.j2"
+    dest: "/etc/nginx/sites-available/{{ site.name }}"
+    mode: 0644
+  notify:
+    - Reload nginx
+
+- name: Enable server conf
+  file:
+    src: "/etc/nginx/sites-available/{{ site.name }}"
+    dest: "/etc/nginx/sites-enabled/{{ site.name }}"
+    state: link
+  notify:
+    - Reload nginx

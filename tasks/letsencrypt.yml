@@ -1,0 +1,22 @@
+---
+- name: Install pip
+  apt:
+    name:
+      - python3-pip
+
+- name: Install certbox
+  # apt:
+  #   name:
+  #     - certbot
+  #     - python3-certbot-nginx
+  pip:
+    name:
+      - certbot==1.13.0
+      - certbot-nginx==1.13.0
+
+- name: Create certificates
+  include_tasks: cert.yml
+  vars:
+    site: "{{ item }}"
+  loop: "{{ sites }}"
+  when: sites is defined

@@ -25,40 +25,21 @@
     rule: allow
     name: Nginx HTTPS
 
-- name: Create html directory
-  file:
-    path: "/var/www/pettypiece.ca/html"
-    state: directory
-    mode: 0755
-    owner: www-data
-    group: www-data
-
-- name: Copy html
-  copy:
-    src: "files/pettypiece.ca/html/"
-    dest: "/var/www/pettypiece.ca/html/"
-
-- name: Create server conf
-  copy:
-    src: "files/pettypiece.ca/conf/pettypiece.ca"
-    dest: "/etc/nginx/sites-available/"
-  notify:
-    - Reload nginx
-
-
-- name: Enable server conf
-  file:
-    src: "/etc/nginx/sites-available/pettypiece.ca"
-    dest: "/etc/nginx/sites-enabled/pettypiece.ca"
-    state: link
-  notify:
-    - Reload nginx
-
 - name:  Set hash bucket size
   lineinfile:
     path: "/etc/nginx/nginx.conf"
     regex: "(# )?server_names_hash_bucket_size 64;"
-    line: "        server_names_hash_bucket_size 64;"
+    line: "        server_names_hash_bucket_size 128;"
     state: present
   notify:
     - Reload nginx
+
+- name: Setup sites
+  include_tasks: site.yml
+  vars:
+    site: "{{ item }}"
+  loop: "{{ sites }}"
+  when: sites is defined
+
+- name: Flush Handlers
+  meta: flush_handlers

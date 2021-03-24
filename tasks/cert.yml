@@ -1,0 +1,17 @@
+---
+- name: Get certbot command line flags
+  set_fact:
+    certbot_flags:
+      - --nginx
+      - --redirect
+      - --agree-tos
+      - -m {{ admin_email }}
+      - --non-interactive
+    domain_flags: "{{ site.domains | map('regex_replace', '^', '-d ') | list }}"
+
+- name: Run certbot
+  command:
+    argv: "{{ ['certbot'] + certbot_flags + domain_flags + testing_flags | default([]) }}"
+    creates: /etc/letsencrypt/live/{{ site.name }}/fullchain.pem
+  notify:
+    - Reload nginx

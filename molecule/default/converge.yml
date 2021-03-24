@@ -1,9 +1,21 @@
 ---
 - name: Converge
-  hosts: all
+  hosts: ubuntu-focal-web
   tasks:
     - name: "Include ansible-web"
       include_role:
         name: "ansible-web"
       tags:
         - always
+  vars:
+    admin_email: admin@example.com
+    sites:
+      - name: example.com
+        domains:
+          - example.com
+          - www.example.com
+        files: tests/example.com/html/
+    testing_flags:
+      - --server
+      - https://pebble:14000/dir
+      - --no-verify-ssl

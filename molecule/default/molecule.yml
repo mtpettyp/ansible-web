@@ -18,6 +18,28 @@ platforms:
     published_ports:
       - "0.0.0.0:443:443/tcp"
       - "0.0.0.0:80:80/tcp"
+    network_mode: bridge
+    docker_networks:
+      - name: web
+        ipam_config:
+          - subnet: "10.30.50.0/16"
+    networks:
+      - name: web
+        ipv4_address: "10.30.50.12"
+    purge_networks: true
+  - name: pebble
+    image: 'letsencrypt/pebble'
+    command: "pebble"
+    pre_build_image: true
+    network_mode: bridge
+    networks:
+      - name: web
+    etc_hosts: "{'example.com': '10.30.50.12'}"
+    volumes:
+      - "$MOLECULE_PROJECT_DIRECTORY/molecule/default/pebble:/test/config"
+  #  env:
+      # PEBBLE_VA_ALWAYS_VALID: "1"
+      # PEBBLE_VA_NOSLEEP: "1"
 provisioner:
   name: ansible
 verifier:
