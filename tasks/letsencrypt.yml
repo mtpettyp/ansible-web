@@ -13,6 +13,7 @@
     name:
       - certbot==1.13.0
       - certbot-nginx==1.13.0
+      - zope.interface==5.3.0
 
 - name: Create certificates
   include_tasks: cert.yml
