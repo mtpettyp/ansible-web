@@ -1,14 +1,11 @@
 ---
-- name: Install pip
+- name: Install dependencies
   apt:
     name:
       - python3-pip
+      - cron
 
 - name: Install certbox
-  # apt:
-  #   name:
-  #     - certbot
-  #     - python3-certbot-nginx
   pip:
     name:
       - certbot==1.13.0
@@ -21,3 +18,15 @@
     site: "{{ item }}"
   loop: "{{ sites }}"
   when: sites is defined
+
+- name: Enable cron
+  service:
+    name: cron
+    enabled: true
+    state: started
+
+- name: Schedule certificate renewal
+  cron:
+    name: renew_cert
+    special_time: weekly
+    job: certbot renew && service nginx reload

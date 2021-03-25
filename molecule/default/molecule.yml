@@ -7,6 +7,7 @@ lint: |
   set -e
   yamllint .
   ansible-lint --force-color
+  flake8
 platforms:
   - name: ubuntu-focal-web
     image: ubuntu:focal
@@ -26,7 +27,8 @@ platforms:
     networks:
       - name: web
         ipv4_address: "10.30.50.12"
-    purge_networks: true
+    env:
+      REQUESTS_CA_BUNDLE: "/etc/ssl/certs/ca-certificates.crt"
   - name: pebble
     image: 'letsencrypt/pebble'
     command: "pebble"
@@ -34,12 +36,10 @@ platforms:
     network_mode: bridge
     networks:
       - name: web
-    etc_hosts: "{'example.com': '10.30.50.12'}"
     volumes:
       - "$MOLECULE_PROJECT_DIRECTORY/molecule/default/pebble:/test/config"
-  #  env:
-      # PEBBLE_VA_ALWAYS_VALID: "1"
-      # PEBBLE_VA_NOSLEEP: "1"
+    env:
+      PEBBLE_VA_ALWAYS_VALID: "1"
 provisioner:
   name: ansible
 verifier:

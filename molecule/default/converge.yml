@@ -1,7 +1,16 @@
 ---
 - name: Converge
   hosts: ubuntu-focal-web
+  handlers:
+    - name: Update trusted certificate authority
+      command: /usr/sbin/update-ca-certificates
   tasks:
+    - name: Install pebble certificate
+      copy:
+        src: pebble/pebble.minica.crt
+        dest: /usr/local/share/ca-certificates
+        mode: 0600
+      notify: Update trusted certificate authority
     - name: "Include ansible-web"
       include_role:
         name: "ansible-web"
@@ -18,4 +27,3 @@
     testing_flags:
       - --server
       - https://pebble:14000/dir
-      - --no-verify-ssl
