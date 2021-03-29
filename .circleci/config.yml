@@ -1,0 +1,10 @@
+version: 2.1
+
+orbs:
+  molecule: mtpettyp/molecule@1.0.1
+
+workflows:
+  test:
+    jobs:
+      - molecule/test:
+          role_name: ansible-web
