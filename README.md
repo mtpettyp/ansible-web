@@ -31,7 +31,7 @@ Example Playbook
           - www.example.com
         files: tests/example.com/html/
   include_role:
-    name: "ansible-mail"
+    name: "ansible-web"
 ```
 
 License
