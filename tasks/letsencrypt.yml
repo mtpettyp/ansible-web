@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies
+- name: Install Let's Encrypt dependencies
   apt:
     name:
       - python3-pip
