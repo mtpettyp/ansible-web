@@ -38,8 +38,9 @@ platforms:
       - name: web
     volumes:
       - "$MOLECULE_PROJECT_DIRECTORY/molecule/default/pebble:/test/config"
-    env:
-      PEBBLE_VA_ALWAYS_VALID: "1"
+      - "$MOLECULE_PROJECT_DIRECTORY/molecule/default/pebble/nsswitch.conf:/etc/nsswitch.conf"
+    etc_hosts: { "example.com": "10.30.50.12",
+                 "www.example.com": "10.30.50.12" }
 provisioner:
   name: ansible
 verifier:
