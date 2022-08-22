@@ -1,12 +1,12 @@
 ---
 - name: Install Let's Encrypt dependencies
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-pip
       - cron
 
 - name: Install certbox
-  pip:
+  ansible.builtin.pip:
     name:
       - certbot==1.29.0
       - certbot-nginx==1.29.0
@@ -20,13 +20,13 @@
   when: sites is defined
 
 - name: Enable cron
-  service:
+  ansible.builtin.service:
     name: cron
     enabled: true
     state: started
 
 - name: Schedule certificate renewal
-  cron:
+  ansible.builtin.cron:
     name: renew_cert
     special_time: weekly
     job: certbot renew && service nginx reload

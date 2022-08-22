@@ -1,32 +1,32 @@
 ---
 - name: Install nginx and ufw
-  apt:
+  ansible.builtin.apt:
     name:
       - nginx
       - ufw
 
 - name: Enable nginx
-  service:
+  ansible.builtin.service:
     name: nginx
     enabled: true
     state: started
 
 - name: Enable ufw
-  ufw:
+  ansible.builtin.ufw:
     state: enabled
 
 - name: Allow HTTP
-  ufw:
+  ansible.builtin.ufw:
     rule: allow
     name: Nginx HTTP
 
 - name: Allow HTTPS
-  ufw:
+  ansible.builtin.ufw:
     rule: allow
     name: Nginx HTTPS
 
 - name:  Set hash bucket size
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: "/etc/nginx/nginx.conf"
     regex: "(# )?server_names_hash_bucket_size 64;"
     line: "        server_names_hash_bucket_size 128;"
@@ -42,4 +42,4 @@
   when: sites is defined
 
 - name: Flush Handlers
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers
