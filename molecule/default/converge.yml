@@ -24,6 +24,12 @@
           - example.com
           - www.example.com
         files: tests/example.com/html/
+        type: static
+      - name: proxied.example.com
+        domains:
+          - proxied.example.com
+        type: proxy
+        proxied_server: http://127.0.0.1:8009/
     testing_flags:
       - --server
       - https://pebble:14000/dir

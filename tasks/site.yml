@@ -14,6 +14,7 @@
     mode: 0644
     owner: www-data
     group: www-data
+  when: site.type == "static"
 
 - name: Check for existing server config
   stat:
@@ -22,7 +23,7 @@
 
 - name: Create server conf
   template:
-    src: "templates/conf/site.j2"
+    src: "templates/conf/site-{{ site.type }}.j2"
     dest: "/etc/nginx/sites-available/{{ site.name }}"
     mode: 0644
   when: not site_conf.stat.exists
