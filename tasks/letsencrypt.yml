@@ -25,6 +25,12 @@
     enabled: true
     state: started
 
+- name: Update cron PATH
+  ansible.builtin.cron:
+    name: PATH
+    env: yes
+    job: /usr/sbin
+
 - name: Schedule certificate renewal
   ansible.builtin.cron:
     name: renew_cert
