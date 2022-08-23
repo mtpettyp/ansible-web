@@ -7,12 +7,10 @@ lint: |
   ansible-lint --force-color
   flake8
 platforms:
-  - name: ubuntu-focal-web
-    image: ubuntu:focal
+  - name: ubuntu-jammy-web
+    image: ubuntu:22.04
     dockerfile: Dockerfile.j2
     privileged: true
-    volumes:
-      - "/sys/fs/cgroup:/sys/fs/cgroup:rw"
     command: "/sbin/init"
     published_ports:
       - "0.0.0.0:443:443/tcp"
