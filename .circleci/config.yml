@@ -8,3 +8,4 @@ workflows:
     jobs:
       - molecule/test:
           role_name: ansible-web
+          machine_image: ubuntu-2204:current

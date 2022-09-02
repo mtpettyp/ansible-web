@@ -1,6 +1,6 @@
 ---
 - name: Converge
-  hosts: ubuntu-focal-web
+  hosts: ubuntu-jammy-web
   handlers:
     - name: Update trusted certificate authority
       ansible.builtin.command: /usr/sbin/update-ca-certificates
