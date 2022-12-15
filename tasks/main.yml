@@ -3,7 +3,9 @@
   ansible.builtin.apt:
     cache_valid_time: 86400
     update_cache: yes
-- import_tasks: nginx.yml
+- name: Include nginx tasks
+  ansible.builtin.include_tasks: nginx.yml
   tags: nginx
-- import_tasks: letsencrypt.yml
+- name: Include Letsencrypt tasks
+  ansible.builtin.include_tasks: letsencrypt.yml
   tags: letsencrypt

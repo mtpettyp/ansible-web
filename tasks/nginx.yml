@@ -12,16 +12,16 @@
     state: started
 
 - name: Enable ufw
-  ansible.builtin.ufw:
+  community.general.ufw:
     state: enabled
 
 - name: Allow HTTP
-  ansible.builtin.ufw:
+  community.general.ufw:
     rule: allow
     name: Nginx HTTP
 
 - name: Allow HTTPS
-  ansible.builtin.ufw:
+  community.general.ufw:
     rule: allow
     name: Nginx HTTPS
 
@@ -35,7 +35,7 @@
     - Reload nginx
 
 - name: Setup sites
-  include_tasks: site.yml
+  ansible.builtin.include_tasks: site.yml
   vars:
     site: "{{ item }}"
   loop: "{{ sites }}"
