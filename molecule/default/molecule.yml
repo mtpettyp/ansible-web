@@ -33,8 +33,8 @@ platforms:
     networks:
       - name: web
     volumes:
-      - "./molecule/default/pebble:/test/config"
-      - "./molecule/default/pebble/nsswitch.conf:/etc/nsswitch.conf"
+      - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/pebble:/test/config"
+      - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/pebble/nsswitch.conf:/etc/nsswitch.conf"
     etc_hosts: { "example.com": "10.30.50.12",
                  "www.example.com": "10.30.50.12",
                  "proxied.example.com": "10.30.50.12" }

@@ -8,9 +8,9 @@
 - name: Install certbox
   ansible.builtin.pip:
     name:
-      - certbot==1.29.0
-      - certbot-nginx==1.29.0
-      - zope.interface==5.4.0
+      - certbot==2.1.0
+      - certbot-nginx==2.1.0
+      - zope.interface==5.5.2
 
 - name: Create certificates
   ansible.builtin.include_tasks: cert.yml

@@ -699,14 +699,14 @@ windows = ["pywinrm"]
 
 [[package]]
 name = "molecule-docker"
-version = "2.1.0"
+version = "2.0.0"
 description = "Molecule aids in the development and testing of Ansible roles"
 category = "main"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "molecule-docker-2.1.0.tar.gz", hash = "sha256:195b97673cbc2335cfa6810816de5cbf807507bf350a9d16ca98b224b1647145"},
-    {file = "molecule_docker-2.1.0-py3-none-any.whl", hash = "sha256:d439b075789be700b6594ed73f3254e2a25ed61dcf312d80ab6e718d13bf150e"},
+    {file = "molecule-docker-2.0.0.tar.gz", hash = "sha256:12c180c95c3f022d89aedd52e42b57e5c1e0ee4d4be8ec997c3dcb9c28d7e2a3"},
+    {file = "molecule_docker-2.0.0-py3-none-any.whl", hash = "sha256:c447842ee4817fe6efa64ca6a73b1e3081cd60710ed86385b6ad7569d9599ab5"},
 ]
 
 [package.dependencies]
@@ -1298,4 +1298,4 @@ setuptools = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "09a9ff390b0b44983fdec21c1f04fd03de78fa1d3ac08cdfd30539e4b6c87371"
+content-hash = "7703b34153537acce18d0684f599745e1a7bc5ad13d18eec0ac511ea8c7605b0"
