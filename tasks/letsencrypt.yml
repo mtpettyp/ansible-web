@@ -29,7 +29,7 @@
   ansible.builtin.cron:
     name: PATH
     env: yes
-    job: /usr/sbin
+    job: /usr/sbin:/usr/local/bin
 
 - name: Schedule certificate renewal
   ansible.builtin.cron:

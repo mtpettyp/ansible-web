@@ -12,5 +12,5 @@ def test_crontab(host):
     """Validate that the crontab is setup """
     crontab = host.file("/var/spool/cron/crontabs/root")
     assert crontab.exists
-    assert crontab.contains('PATH="/usr/sbin"')
+    assert crontab.contains('PATH="/usr/sbin:/usr/local/bin"')
     assert crontab.contains("@weekly certbot renew && service nginx reload")
