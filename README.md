@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/mtpettyp/ansible-web.svg?style=svg)](https://circleci.com/gh/mtpettyp/ansible-web)
+[![Test](https://github.com/mtpettyp/ansible-web/actions/workflows/test.yml/badge.svg)](https://github.com/mtpettyp/ansible-web/actions/workflows/test.yml)
 
 
 Web
@@ -46,18 +46,15 @@ Example Playbook
 Development
 -----------
 
-Poetry is used to manage this project's Python dependencies
+uv is used to manage this project's Python dependencies
 
 ### Installation
-`poetry install --no-root`
+`uv sync`
 
 ### Running
-`poetry run molecule test`
-
-Alternative, you can create a shell by running `poetry shell` and run the `molecule` commands directly
+`uv run molecule test`
 
 License
 -------
 
 MIT
-

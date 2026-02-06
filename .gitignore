@@ -1,7 +1,9 @@
 .cache/
+.venv/
 .vscode/
 .pytest_cache/
 __pycache__/
 
 *.pyc
 pytestdebug.log
+.claude/settings.local.json
