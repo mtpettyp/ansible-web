@@ -10,23 +10,23 @@ platforms:
     published_ports:
       - "0.0.0.0:443:443/tcp"
       - "0.0.0.0:80:80/tcp"
-    network_mode: bridge
     docker_networks:
       - name: web
         ipam_config:
-          - subnet: "10.30.50.0/16"
+          - subnet: "10.30.50.0/24"
     networks:
       - name: web
         ipv4_address: "10.30.50.12"
+    etc_hosts: { "pebble": "10.30.50.13" }
     env:
       REQUESTS_CA_BUNDLE: "/etc/ssl/certs/ca-certificates.crt"
   - name: pebble
-    image: 'letsencrypt/pebble'
-    command: "pebble"
+    image: 'ghcr.io/letsencrypt/pebble'
     pre_build_image: true
-    network_mode: bridge
+    command: "-config /test/config/pebble-config.json"
     networks:
       - name: web
+        ipv4_address: "10.30.50.13"
     volumes:
       - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/pebble:/test/config"
       - "${MOLECULE_PROJECT_DIRECTORY}/molecule/default/pebble/nsswitch.conf:/etc/nsswitch.conf"
@@ -35,5 +35,8 @@ platforms:
                  "proxied.example.com": "10.30.50.12" }
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      roles_path: ${MOLECULE_PROJECT_DIRECTORY}/..
 verifier:
   name: testinfra
